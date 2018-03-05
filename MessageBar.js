@@ -12,7 +12,8 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  Image
+  Image,
+  SafeAreaView
 } from 'react-native'
 
 let windowWidth = Dimensions.get('window').width
@@ -453,32 +454,34 @@ class MessageBar extends Component {
           paddingLeft: this.state.viewLeftInset,
           paddingRight: this.state.viewRightInset
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            this._alertTapped()
-          }}
-          style={{ flex: 1 }}>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              padding: this.state.messageBarPadding
-            }}>
-            {this.renderImage()}
+        <SafeAreaView style={{ flex: 1 }}>
+          <TouchableOpacity
+            onPress={() => {
+              this._alertTapped()
+            }}
+            style={{ flex: 1 }}>
             <View
               style={{
                 flex: 1,
-                flexDirection: 'column',
-                alignSelf: 'stretch',
-                justifyContent: 'center',
-                marginLeft: 10
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                padding: this.state.messageBarPadding
               }}>
-              {this.renderTitle()}
-              {this.renderMessage()}
+              {this.renderImage()}
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'column',
+                  alignSelf: 'stretch',
+                  justifyContent: 'center',
+                  marginLeft: 10
+                }}>
+                {this.renderTitle()}
+                {this.renderMessage()}
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </SafeAreaView>
       </Animated.View>
     )
   }
